@@ -7,233 +7,423 @@
   <meta property="og:title" content="I love you, Adelein">
   <meta property="og:description" content="A heart drawn from 'I love you' in twenty languages, for Adelein.">
   <meta name="description" content="A heart drawn from 'I love you' in twenty languages, for Adelein.">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#0a0610">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       width: 100%;
       height: 100%;
-      background: #000;
-      color: #e11d48;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #0a0610;
       overflow: hidden;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
       touch-action: manipulation;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
-    #stage {
+    #wrap {
       position: relative;
       width: 100%;
       height: 100%;
       cursor: pointer;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 42%, rgba(120, 20, 50, 0.35) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 50% 100%, rgba(80, 10, 40, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 50% 0%, #1a0a18 0%, #0a0610 55%, #050308 100%);
     }
-    .phrase {
+    canvas {
       position: absolute;
-      color: #e11d48;
-      font-weight: 600;
-      white-space: nowrap;
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.65);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      pointer-events: none;
-      text-shadow: 0 0 10px rgba(225, 29, 72, 0.4);
-      letter-spacing: 0.01em;
-      line-height: 1;
-    }
-    .phrase.visible {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
     #name {
       position: absolute;
       left: 50%;
-      top: 50%;
-      transform: translate(-50%, -42%) scale(0.92);
-      color: #fff;
-      font-weight: 700;
-      font-size: clamp(2rem, 11vw, 3.25rem);
-      letter-spacing: 0.18em;
-      text-indent: 0.18em;
-      text-align: center;
-      white-space: nowrap;
+      top: 48%;
+      transform: translate(-50%, -50%) scale(0.9);
+      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      font-weight: 600;
+      font-style: italic;
+      font-size: clamp(2.4rem, 12vw, 4.2rem);
+      letter-spacing: 0.22em;
+      text-indent: 0.22em;
+      color: #fff8f5;
       opacity: 0;
       pointer-events: none;
+      z-index: 3;
       text-shadow:
-        0 0 18px rgba(225, 29, 72, 0.55),
-        0 0 40px rgba(225, 29, 72, 0.25);
-      transition: opacity 1s ease, transform 1s ease;
-      z-index: 2;
+        0 0 20px rgba(255, 80, 120, 0.55),
+        0 0 48px rgba(225, 40, 90, 0.35),
+        0 2px 12px rgba(0, 0, 0, 0.45);
+      transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      white-space: nowrap;
     }
     #name.show {
       opacity: 1;
-      transform: translate(-50%, -42%) scale(1);
-      animation: pulse 2.4s ease-in-out 1s infinite;
+      transform: translate(-50%, -50%) scale(1);
     }
-    @keyframes pulse {
-      0%, 100% { transform: translate(-50%, -42%) scale(1); text-shadow: 0 0 18px rgba(225, 29, 72, 0.55), 0 0 40px rgba(225, 29, 72, 0.25); }
-      50% { transform: translate(-50%, -42%) scale(1.04); text-shadow: 0 0 26px rgba(225, 29, 72, 0.8), 0 0 56px rgba(225, 29, 72, 0.4); }
+    #name.pulse {
+      animation: heartbeat 1.6s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      14% { transform: translate(-50%, -50%) scale(1.06); }
+      28% { transform: translate(-50%, -50%) scale(0.98); }
+      42% { transform: translate(-50%, -50%) scale(1.04); }
+      70% { transform: translate(-50%, -50%) scale(1); }
     }
     #hint {
       position: absolute;
       left: 0;
       right: 0;
-      bottom: max(1.25rem, env(safe-area-inset-bottom));
+      bottom: max(1.35rem, env(safe-area-inset-bottom));
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(225, 29, 72, 0.5);
+      color: rgba(255, 180, 200, 0.45);
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.8s ease;
       pointer-events: none;
-      z-index: 2;
+      z-index: 3;
     }
     #hint.show { opacity: 1; }
   </style>
 </head>
 <body>
-  <div id="stage" role="img" aria-label="A red heart formed by the phrase I love you in twenty languages, for Adelein. Tap to replay.">
+  <div id="wrap" role="img" aria-label="A heart formed by I love you in twenty languages, for Adelein. Tap to replay.">
+    <canvas id="c"></canvas>
     <div id="name">ADELEIN</div>
     <div id="hint">Tap to replay</div>
   </div>
   <script>
-    (function () {
-      var PHRASES = [
-        "I love you",
-        "Ich liebe dich",
-        "Te amo",
-        "Je t'aime",
-        "Ti amo",
-        "Ek is lief vir jou",
-        "Ngiyakuthanda",
-        "Ndiyakuthanda",
-        "Aku cinta kamu",
-        "Seni seviyorum",
-        "Jag älskar dig",
-        "Kocham cię",
-        "Ik hou van jou",
-        "Anh yêu em",
-        "Я тебя люблю",
-        "사랑해",
-        "愛してる",
-        "我爱你",
-        "मैं तुमसे प्यार करता हूँ",
-        "Σ' αγαπώ"
-      ];
+  (function () {
+    var PHRASES = [
+      "I love you", "Ich liebe dich", "Te amo", "Je t'aime", "Ti amo",
+      "Ek is lief vir jou", "Ngiyakuthanda", "Ndiyakuthanda", "Aku cinta kamu",
+      "Seni seviyorum", "Jag älskar dig", "Kocham cię", "Ik hou van jou",
+      "Anh yêu em", "Я тебя люблю", "사랑해", "愛してる", "我爱你",
+      "मैं तुमसे प्यार करता हूँ", "Σ' αγαπώ"
+    ];
 
-      var stage = document.getElementById("stage");
-      var hint = document.getElementById("hint");
-      var nameEl = document.getElementById("name");
-      var nodes = [];
-      var timer = null;
-      var nameTimer = null;
-      var running = false;
+    var wrap = document.getElementById("wrap");
+    var canvas = document.getElementById("c");
+    var ctx = canvas.getContext("2d");
+    var nameEl = document.getElementById("name");
+    var hint = document.getElementById("hint");
 
-      function heartPoint(t) {
-        var x = 16 * Math.pow(Math.sin(t), 3);
-        var y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
-        return { x: x, y: y };
+    var dpr = 1;
+    var W = 0, H = 0;
+    var words = [];
+    var stars = [];
+    var animId = null;
+    var startTime = 0;
+    var phase = "idle"; // building | complete
+    var completeAt = 0;
+    var phraseIndex = 0;
+    var running = false;
+
+    function heartXY(t) {
+      var x = 16 * Math.pow(Math.sin(t), 3);
+      var y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+      return { x: x, y: y };
+    }
+
+    // Point-in-heart via ray cast against dense outline polygon
+    function buildOutline(n) {
+      var pts = [];
+      for (var i = 0; i < n; i++) pts.push(heartXY((i / n) * Math.PI * 2));
+      return pts;
+    }
+
+    function insideHeart(x, y, outline) {
+      // Ray casting
+      var inside = false;
+      for (var i = 0, j = outline.length - 1; i < outline.length; j = i++) {
+        var xi = outline[i].x, yi = outline[i].y;
+        var xj = outline[j].x, yj = outline[j].y;
+        var intersect = ((yi > y) !== (yj > y)) &&
+          (x < (xj - xi) * (y - yi) / ((yj - yi) || 1e-12) + xi);
+        if (intersect) inside = !inside;
+      }
+      return inside;
+    }
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function nextPhrase() {
+      var p = PHRASES[phraseIndex % PHRASES.length];
+      phraseIndex++;
+      return p;
+    }
+
+    function layout() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+      W = wrap.clientWidth;
+      H = wrap.clientHeight;
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      var shortSide = Math.min(W, H);
+      var scale = shortSide / 38;
+      var cx = W / 2;
+      var cy = H / 2 + shortSide * 0.02;
+
+      // Stars
+      stars = [];
+      var starCount = Math.floor((W * H) / 9000);
+      for (var s = 0; s < starCount; s++) {
+        stars.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.random() * 1.4 + 0.3,
+          a: Math.random() * 0.5 + 0.15,
+          tw: Math.random() * Math.PI * 2,
+          sp: 0.4 + Math.random() * 1.2
+        });
       }
 
-      function sampleCurve(count, minDist) {
-        var samples = [];
-        var n = 400;
-        for (var i = 0; i < n; i++) {
-          samples.push(heartPoint((i / n) * Math.PI * 2));
+      // Build filled heart of words
+      var outline = buildOutline(360);
+      words = [];
+      phraseIndex = 0;
+
+      // 1) Full closed outline — arc-length spaced (THIS was the bug: old code stopped at 48 pts mid-curve)
+      var outlineSamples = [];
+      var N = 800;
+      for (var i = 0; i < N; i++) outlineSamples.push(heartXY((i / N) * Math.PI * 2));
+      var arc = [0];
+      for (var i = 1; i < N; i++) {
+        var dx = outlineSamples[i].x - outlineSamples[i - 1].x;
+        var dy = outlineSamples[i].y - outlineSamples[i - 1].y;
+        arc.push(arc[i - 1] + Math.hypot(dx, dy));
+      }
+      var totalArc = arc[N - 1] + Math.hypot(
+        outlineSamples[0].x - outlineSamples[N - 1].x,
+        outlineSamples[0].y - outlineSamples[N - 1].y
+      );
+      var outlineCount = Math.max(56, Math.round(shortSide / 7));
+      for (var k = 0; k < outlineCount; k++) {
+        var target = (k / outlineCount) * totalArc;
+        // binary search arc
+        var lo = 0, hi = N - 1;
+        while (lo < hi) {
+          var mid = (lo + hi) >> 1;
+          if (arc[mid] < target) lo = mid + 1; else hi = mid;
         }
-        var picked = [samples[0]];
-        for (var i = 1; i < samples.length; i++) {
-          var last = picked[picked.length - 1];
-          var dx = samples[i].x - last.x;
-          var dy = samples[i].y - last.y;
-          if (Math.sqrt(dx * dx + dy * dy) >= minDist) {
-            picked.push(samples[i]);
-            if (picked.length >= count) break;
-          }
+        var p = outlineSamples[lo];
+        words.push({
+          text: nextPhrase(),
+          mx: p.x, my: p.y,
+          x: cx + p.x * scale,
+          y: cy - p.y * scale,
+          size: Math.max(9, Math.min(13, shortSide / 34)),
+          weight: 600,
+          delay: 0, // set below
+          kind: "outline"
+        });
+      }
+
+      // 2) Interior fill — concentric scaled outlines + interior lattice
+      var fillScales = [0.82, 0.64, 0.46, 0.28];
+      fillScales.forEach(function (fs, ring) {
+        var count = Math.max(12, Math.round(outlineCount * fs * 0.85));
+        for (var k = 0; k < count; k++) {
+          var t = (k / count) * Math.PI * 2;
+          var p = heartXY(t);
+          words.push({
+            text: nextPhrase(),
+            mx: p.x * fs, my: p.y * fs,
+            x: cx + p.x * fs * scale,
+            y: cy - p.y * fs * scale,
+            size: Math.max(8, Math.min(11.5, shortSide / 40)),
+            weight: 500,
+            delay: 0,
+            kind: "fill"
+          });
         }
-        return picked;
-      }
-
-      function layout() {
-        var w = stage.clientWidth;
-        var h = stage.clientHeight;
-        var shortSide = Math.min(w, h);
-        var scale = shortSide / 36;
-        var cx = w / 2;
-        var cy = h / 2 + shortSide * 0.02;
-        var fontSize = Math.max(9, Math.min(13, shortSide / 32));
-
-        for (var i = 0; i < nodes.length; i++) {
-          var p = nodes[i]._pt;
-          var el = nodes[i];
-          el.style.left = (cx + p.x * scale) + "px";
-          el.style.top = (cy - p.y * scale) + "px";
-          el.style.fontSize = fontSize + "px";
-        }
-      }
-
-      function clearNodes() {
-        for (var i = 0; i < nodes.length; i++) nodes[i].remove();
-        nodes = [];
-      }
-
-      function build() {
-        clearNodes();
-        var points = sampleCurve(48, 1.15);
-        for (var i = 0; i < points.length; i++) {
-          var el = document.createElement("span");
-          el.className = "phrase";
-          el.textContent = PHRASES[i % PHRASES.length];
-          el._pt = points[i];
-          stage.appendChild(el);
-          nodes.push(el);
-        }
-        layout();
-      }
-
-      function play() {
-        if (running) return;
-        running = true;
-        hint.classList.remove("show");
-        nameEl.classList.remove("show");
-        document.documentElement.removeAttribute("data-ready");
-        if (timer) { clearTimeout(timer); timer = null; }
-        if (nameTimer) { clearTimeout(nameTimer); nameTimer = null; }
-        build();
-
-        var i = 0;
-        var delay = 90;
-
-        function step() {
-          if (i < nodes.length) {
-            nodes[i].classList.add("visible");
-            i++;
-            timer = setTimeout(step, delay);
-          } else {
-            // Heart done — fade in ADELEIN, then mark ready after fade
-            nameEl.classList.add("show");
-            hint.classList.add("show");
-            running = false;
-            nameTimer = setTimeout(function () {
-              document.documentElement.setAttribute("data-ready", "1");
-            }, 1100);
-          }
-        }
-        timer = setTimeout(step, 80);
-      }
-
-      stage.addEventListener("click", function () {
-        if (running) return;
-        play();
       });
 
-      window.addEventListener("resize", function () {
-        if (nodes.length) layout();
+      // Dense lattice fill for remaining gaps
+      var step = 2.35;
+      for (var my = -17; my <= 13; my += step * 0.85) {
+        for (var mx = -16; mx <= 16; mx += step) {
+          if (!insideHeart(mx, my, outline)) continue;
+          // skip if too close to an existing word (math space)
+          var tooClose = false;
+          for (var w = 0; w < words.length; w++) {
+            if (Math.hypot(words[w].mx - mx, words[w].my - my) < 1.55) {
+              tooClose = true; break;
+            }
+          }
+          if (tooClose) continue;
+          // leave a quiet centre for ADELEIN
+          if (Math.hypot(mx, my - 1.5) < 4.2) continue;
+          words.push({
+            text: nextPhrase(),
+            mx: mx, my: my,
+            x: cx + mx * scale,
+            y: cy - my * scale,
+            size: Math.max(7.5, Math.min(10.5, shortSide / 44)),
+            weight: 500,
+            delay: 0,
+            kind: "fill"
+          });
+        }
+      }
+
+      // Stagger delays: outline first (around the loop), then fill inward
+      var outlineWords = words.filter(function (w) { return w.kind === "outline"; });
+      var fillWords = words.filter(function (w) { return w.kind === "fill"; });
+      // Sort fill by distance from centre (outer first → inward)
+      fillWords.sort(function (a, b) {
+        return Math.hypot(b.mx, b.my) - Math.hypot(a.mx, a.my);
       });
 
+      var t0 = 0;
+      var outlineStep = 42;
+      outlineWords.forEach(function (w, i) {
+        w.delay = t0 + i * outlineStep;
+      });
+      t0 += outlineWords.length * outlineStep + 180;
+      var fillStep = 28;
+      fillWords.forEach(function (w, i) {
+        w.delay = t0 + i * fillStep;
+      });
+
+      words = outlineWords.concat(fillWords);
+      words._cx = cx;
+      words._cy = cy;
+      words._scale = scale;
+      words._duration = t0 + fillWords.length * fillStep + 500;
+    }
+
+    function draw(now) {
+      var t = now - startTime;
+      ctx.clearRect(0, 0, W, H);
+
+      // Soft bloom behind heart
+      var g = ctx.createRadialGradient(W / 2, H * 0.48, 0, W / 2, H * 0.48, Math.min(W, H) * 0.42);
+      g.addColorStop(0, "rgba(220, 40, 90, 0.16)");
+      g.addColorStop(0.5, "rgba(160, 20, 70, 0.07)");
+      g.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+
+      // Stars
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        var tw = 0.5 + 0.5 * Math.sin(now * 0.001 * s.sp + s.tw);
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255, 220, 230," + (s.a * tw) + ")";
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Heartbeat scale once complete
+      var beat = 1;
+      if (phase === "complete") {
+        var bt = (now - completeAt) / 1000;
+        var cycle = bt % 1.6;
+        if (cycle < 0.14) beat = 1 + 0.035 * Math.sin((cycle / 0.14) * Math.PI);
+        else if (cycle < 0.28) beat = 1 + 0.015 * Math.sin(((cycle - 0.14) / 0.14) * Math.PI);
+      }
+
+      var cx = words._cx, cy = words._cy;
+      ctx.save();
+      if (beat !== 1) {
+        ctx.translate(cx, cy);
+        ctx.scale(beat, beat);
+        ctx.translate(-cx, -cy);
+      }
+
+      for (var i = 0; i < words.length; i++) {
+        var w = words[i];
+        var local = t - w.delay;
+        if (local < 0) continue;
+        var u = Math.min(1, local / 420);
+        var e = easeOutCubic(u);
+        var alpha = e * (w.kind === "outline" ? 0.95 : 0.72);
+        var sc = 0.55 + 0.45 * e;
+
+        ctx.save();
+        ctx.translate(w.x, w.y);
+        ctx.scale(sc, sc);
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = w.kind === "outline" ? "#ff4d6d" : "#e83a5c";
+        ctx.shadowColor = "rgba(255, 60, 100, 0.55)";
+        ctx.shadowBlur = w.kind === "outline" ? 10 : 6;
+        ctx.font = w.weight + " " + w.size + "px system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(w.text, 0, 0);
+        ctx.restore();
+      }
+      ctx.restore();
+
+      if (phase === "building" && t >= words._duration) {
+        phase = "complete";
+        completeAt = now;
+        nameEl.classList.add("show");
+        setTimeout(function () { nameEl.classList.add("pulse"); }, 1100);
+        hint.classList.add("show");
+        running = false;
+        document.documentElement.setAttribute("data-ready", "1");
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    function play() {
+      if (running) return;
+      running = true;
+      phase = "building";
+      nameEl.classList.remove("show", "pulse");
+      hint.classList.remove("show");
+      document.documentElement.removeAttribute("data-ready");
+      layout();
+      startTime = performance.now();
+      if (animId) cancelAnimationFrame(animId);
+      animId = requestAnimationFrame(draw);
+    }
+
+    wrap.addEventListener("click", function () {
+      if (running) return;
       play();
-    })();
+    });
+
+    var resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var wasComplete = phase === "complete";
+        layout();
+        if (wasComplete) {
+          // Snap all words visible after resize
+          startTime = performance.now() - words._duration - 100;
+          phase = "complete";
+          nameEl.classList.add("show", "pulse");
+          hint.classList.add("show");
+          document.documentElement.setAttribute("data-ready", "1");
+        }
+      }, 120);
+    });
+
+    play();
+  })();
   </script>
 </body>
+<!-- build:85d64ee568dff484 -->
+<!-- build:075a6d02facccb83 -->
 </html>
