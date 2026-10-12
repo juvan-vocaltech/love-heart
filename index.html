@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>I love you, Adelein</title>
+  <meta property="og:title" content="I love you, Adelein">
+  <meta property="og:description" content="A heart drawn from 'I love you' in twenty languages, for Adelein.">
+  <meta name="description" content="A heart drawn from 'I love you' in twenty languages, for Adelein.">
+  <meta name="theme-color" content="#000000">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #e11d48;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      touch-action: manipulation;
+    }
+    #stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    .phrase {
+      position: absolute;
+      color: #e11d48;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.65);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      text-shadow: 0 0 10px rgba(225, 29, 72, 0.4);
+      letter-spacing: 0.01em;
+      line-height: 1;
+    }
+    .phrase.visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    #name {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -42%) scale(0.92);
+      color: #fff;
+      font-weight: 700;
+      font-size: clamp(2rem, 11vw, 3.25rem);
+      letter-spacing: 0.18em;
+      text-indent: 0.18em;
+      text-align: center;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      text-shadow:
+        0 0 18px rgba(225, 29, 72, 0.55),
+        0 0 40px rgba(225, 29, 72, 0.25);
+      transition: opacity 1s ease, transform 1s ease;
+      z-index: 2;
+    }
+    #name.show {
+      opacity: 1;
+      transform: translate(-50%, -42%) scale(1);
+      animation: pulse 2.4s ease-in-out 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -42%) scale(1); text-shadow: 0 0 18px rgba(225, 29, 72, 0.55), 0 0 40px rgba(225, 29, 72, 0.25); }
+      50% { transform: translate(-50%, -42%) scale(1.04); text-shadow: 0 0 26px rgba(225, 29, 72, 0.8), 0 0 56px rgba(225, 29, 72, 0.4); }
+    }
+    #hint {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: max(1.25rem, env(safe-area-inset-bottom));
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(225, 29, 72, 0.5);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+    #hint.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div id="stage" role="img" aria-label="A red heart formed by the phrase I love you in twenty languages, for Adelein. Tap to replay.">
+    <div id="name">ADELEIN</div>
+    <div id="hint">Tap to replay</div>
+  </div>
+  <script>
+    (function () {
+      var PHRASES = [
+        "I love you",
+        "Ich liebe dich",
+        "Te amo",
+        "Je t'aime",
+        "Ti amo",
+        "Ek is lief vir jou",
+        "Ngiyakuthanda",
+        "Ndiyakuthanda",
+        "Aku cinta kamu",
+        "Seni seviyorum",
+        "Jag älskar dig",
+        "Kocham cię",
+        "Ik hou van jou",
+        "Anh yêu em",
+        "Я тебя люблю",
+        "사랑해",
+        "愛してる",
+        "我爱你",
+        "मैं तुमसे प्यार करता हूँ",
+        "Σ' αγαπώ"
+      ];
+
+      var stage = document.getElementById("stage");
+      var hint = document.getElementById("hint");
+      var nameEl = document.getElementById("name");
+      var nodes = [];
+      var timer = null;
+      var nameTimer = null;
+      var running = false;
+
+      function heartPoint(t) {
+        var x = 16 * Math.pow(Math.sin(t), 3);
+        var y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+        return { x: x, y: y };
+      }
+
+      function sampleCurve(count, minDist) {
+        var samples = [];
+        var n = 400;
+        for (var i = 0; i < n; i++) {
+          samples.push(heartPoint((i / n) * Math.PI * 2));
+        }
+        var picked = [samples[0]];
+        for (var i = 1; i < samples.length; i++) {
+          var last = picked[picked.length - 1];
+          var dx = samples[i].x - last.x;
+          var dy = samples[i].y - last.y;
+          if (Math.sqrt(dx * dx + dy * dy) >= minDist) {
+            picked.push(samples[i]);
+            if (picked.length >= count) break;
+          }
+        }
+        return picked;
+      }
+
+      function layout() {
+        var w = stage.clientWidth;
+        var h = stage.clientHeight;
+        var shortSide = Math.min(w, h);
+        var scale = shortSide / 36;
+        var cx = w / 2;
+        var cy = h / 2 + shortSide * 0.02;
+        var fontSize = Math.max(9, Math.min(13, shortSide / 32));
+
+        for (var i = 0; i < nodes.length; i++) {
+          var p = nodes[i]._pt;
+          var el = nodes[i];
+          el.style.left = (cx + p.x * scale) + "px";
+          el.style.top = (cy - p.y * scale) + "px";
+          el.style.fontSize = fontSize + "px";
+        }
+      }
+
+      function clearNodes() {
+        for (var i = 0; i < nodes.length; i++) nodes[i].remove();
+        nodes = [];
+      }
+
+      function build() {
+        clearNodes();
+        var points = sampleCurve(48, 1.15);
+        for (var i = 0; i < points.length; i++) {
+          var el = document.createElement("span");
+          el.className = "phrase";
+          el.textContent = PHRASES[i % PHRASES.length];
+          el._pt = points[i];
+          stage.appendChild(el);
+          nodes.push(el);
+        }
+        layout();
+      }
+
+      function play() {
+        if (running) return;
+        running = true;
+        hint.classList.remove("show");
+        nameEl.classList.remove("show");
+        document.documentElement.removeAttribute("data-ready");
+        if (timer) { clearTimeout(timer); timer = null; }
+        if (nameTimer) { clearTimeout(nameTimer); nameTimer = null; }
+        build();
+
+        var i = 0;
+        var delay = 90;
+
+        function step() {
+          if (i < nodes.length) {
+            nodes[i].classList.add("visible");
+            i++;
+            timer = setTimeout(step, delay);
+          } else {
+            // Heart done — fade in ADELEIN, then mark ready after fade
+            nameEl.classList.add("show");
+            hint.classList.add("show");
+            running = false;
+            nameTimer = setTimeout(function () {
+              document.documentElement.setAttribute("data-ready", "1");
+            }, 1100);
+          }
+        }
+        timer = setTimeout(step, 80);
+      }
+
+      stage.addEventListener("click", function () {
+        if (running) return;
+        play();
+      });
+
+      window.addEventListener("resize", function () {
+        if (nodes.length) layout();
+      });
+
+      play();
+    })();
+  </script>
+</body>
+</html>
