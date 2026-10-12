@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
   <title>I love you, Adelein</title>
   <meta property="og:title" content="I love you, Adelein">
-  <meta property="og:description" content="A heart drawn from 'I love you' in twenty languages, for Adelein.">
-  <meta name="description" content="A heart drawn from 'I love you' in twenty languages, for Adelein.">
+  <meta property="og:description" content="A heart drawn from 'I love you' in a hundred languages, for Adelein.">
+  <meta name="description" content="A heart drawn from 'I love you' in a hundred languages, for Adelein.">
   <meta name="theme-color" content="#0a0610">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,84 +14,53 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      width: 100%;
-      height: 100%;
-      height: 100dvh;
-      background: #0a0610;
-      overflow: hidden;
+      width: 100%; height: 100%; height: 100dvh;
+      background: #0a0610; overflow: hidden;
       -webkit-tap-highlight-color: transparent;
-      user-select: none;
-      touch-action: manipulation;
-      font-family: "Noto Sans","Noto Sans Arabic","Noto Sans Hebrew","Noto Sans Devanagari","Noto Sans Bengali","Noto Sans Gurmukhi","Noto Sans Gujarati","Noto Sans Tamil","Noto Sans Telugu","Noto Sans Kannada","Noto Sans Malayalam","Noto Sans Sinhala","Noto Sans Thai","Noto Sans Lao","Noto Sans Khmer","Noto Sans Myanmar","Noto Sans JP","Noto Sans KR","Noto Sans SC","Noto Sans TC","Noto Sans Armenian","Noto Sans Georgian","Noto Sans Ethiopic","Noto Sans Tibetan","Noto Sans Canadian Aboriginal",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-      padding:
-        env(safe-area-inset-top, 0px)
-        env(safe-area-inset-right, 0px)
-        env(safe-area-inset-bottom, 0px)
-        env(safe-area-inset-left, 0px);
+      user-select: none; touch-action: manipulation;
+      font-family: "Noto Sans", system-ui, sans-serif;
+      padding: env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
     }
     #wrap {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
+      position: relative; width: 100%; height: 100%; cursor: pointer;
       background:
-        radial-gradient(ellipse 70% 55% at 50% 48%, rgba(120, 20, 50, 0.3) 0%, transparent 58%),
-        radial-gradient(ellipse 50% 35% at 50% 100%, rgba(80, 10, 40, 0.32) 0%, transparent 50%),
+        radial-gradient(ellipse 70% 55% at 50% 48%, rgba(120, 20, 50, 0.28) 0%, transparent 58%),
         radial-gradient(ellipse 100% 100% at 50% 0%, #1a0a18 0%, #0a0610 55%, #050308 100%);
     }
     canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
     #name {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0.92);
-      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      font-weight: 600;
-      font-style: italic;
-      font-size: 2rem;
-      letter-spacing: 0.16em;
-      text-indent: 0.16em;
-      color: #fff8f5;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 3;
-      text-shadow:
-        0 0 16px rgba(255, 80, 120, 0.65),
-        0 0 36px rgba(225, 40, 90, 0.4),
-        0 2px 10px rgba(0, 0, 0, 0.55);
-      transition: opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(0.94);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 600; font-style: italic;
+      font-size: 2rem; letter-spacing: 0.14em; text-indent: 0.14em;
+      color: #fff8f5; opacity: 0; pointer-events: none; z-index: 3;
+      text-shadow: 0 0 3px #1a0610, 0 0 8px #1a0610, 0 0 16px rgba(255,80,120,0.85), 0 0 28px rgba(225,40,90,0.5);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
       white-space: nowrap;
     }
     #name.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     #name.pulse { animation: heartbeat 1.6s ease-in-out infinite; }
     @keyframes heartbeat {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); }
-      14% { transform: translate(-50%, -50%) scale(1.05); }
-      28% { transform: translate(-50%, -50%) scale(0.985); }
-      42% { transform: translate(-50%, -50%) scale(1.035); }
-      70% { transform: translate(-50%, -50%) scale(1); }
+      0%,100% { transform: translate(-50%,-50%) scale(1); }
+      14% { transform: translate(-50%,-50%) scale(1.045); }
+      28% { transform: translate(-50%,-50%) scale(0.99); }
+      42% { transform: translate(-50%,-50%) scale(1.03); }
+      70% { transform: translate(-50%,-50%) scale(1); }
     }
     #hint {
-      position: absolute;
-      left: 0; right: 0;
+      position: absolute; left: 0; right: 0;
       bottom: max(0.85rem, calc(env(safe-area-inset-bottom, 0px) + 0.65rem));
-      text-align: center;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255, 180, 200, 0.4);
-      opacity: 0;
-      transition: opacity 0.8s ease;
-      pointer-events: none;
-      z-index: 3;
+      text-align: center; font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,180,200,0.4); opacity: 0; transition: opacity 0.8s ease;
+      pointer-events: none; z-index: 3;
     }
     #hint.show { opacity: 1; }
   </style>
 </head>
 <body>
-  <div id="wrap" role="img" aria-label="A heart formed by I love you in twenty languages, for Adelein. Tap to replay.">
+  <div id="wrap" role="img" aria-label="A dense heart of I love you in many languages, for Adelein. Tap to replay.">
     <canvas id="c"></canvas>
     <div id="name">ADELEIN</div>
     <div id="hint">Tap to replay</div>
@@ -99,8 +68,9 @@
   <script>
   (function () {
     var PHRASES = ["I love you", "Ek is lief vir jou", "Ngiyakuthanda", "Ndiyakuthanda", "Ke a o rata", "Ke a go rata", "Ndi a ni funa", "Ndza ku rhandza", "Ngiyakutsandza", "Ngiyakuthandza", "Te amo", "Eu te amo", "Je t'aime", "Ti amo", "Ich liebe dich", "Ik hou van jou", "Jag älskar dig", "Jeg elsker deg", "Jeg elsker dig", "Minä rakastan sinua", "Ég elska þig", "Eg elski teg", "Tá grá agam duit", "Rwy'n dy garu di", "Tha gaol agam ort", "Me a gar ac'hanout", "My a'th kar", "Ta graih aym ort", "Mun ráhkistan du", "Asavakkit", "Ech hunn dech gär", "Ik hâld fan dy", "Ma armastan sind", "Es tevi mīlu", "Aš tave myliu", "Kocham cię", "Miluji tě", "Ľúbim ťa", "Szeretlek", "Te iubesc", "Обичам те", "Волим те", "Volim te", "Ljubim te", "Те сакам", "Të dua", "Σ' αγαπώ", "T'estimo", "Maite zaitut", "Quérote", "T'aimi", "Inħobbok", "Я тебя люблю", "Я тебе люблю", "Я цябе кахаю", "Seni seviyorum", "Səni sevirəm", "Мен сені жақсы көремін", "Men seni sevaman", "Мен сени сүйөм", "Men seni söýýärin", "Ман туро дӯст медорам", "Мин сине яратам", "მე მიყვარხარ", "Ես սիրում եմ քեզ", "Ez ji te hez dikim", "Би чамд хайртай", "أحبك", "دوستت دارم", "میں تم سے محبت کرتا ہوں", "زه تا سره مینه لرم", "مەن سېنى ياخشى كۆرىمەن", "مان توسان پيار ڪريان ٿو", "אני אוהב אותך", "איך ליב דיך", "मैं तुमसे प्यार करता हूँ", "আমি তোমাকে ভালোবাসি", "ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ", "હું તને પ્રેમ કરું છું", "मी तुझ्यावर प्रेम करतो", "நான் உன்னை காதலிக்கிறேன்", "నేను నిన్ను ప్రేమిస్తున్నాను", "ನಾನು ನಿನ్నನ್ನು ಪ್ರೀತಿಸುತ್ತೇನೆ", "ഞാൻ നിന്നെ സ്നേഹിക്കുന്നു", "මම ඔයාට ආදරෙයි", "म तिमीलाई माया गर्छु", "মই তোমাক ভাল পাওঁ", "ฉันรักเธอ", "ຂ້ອຍຮັກເຈົ້າ", "ខ្ញុំស្រលាញ់អ្នក", "မင်းကိုချစ်တယ်", "Anh yêu em", "Aku cinta kamu", "Saya sayang kamu", "Mahal kita", "Gihigugma ko ikaw", "Aku tresna kowe", "Abdi bogoh ka anjeun", "我爱你", "我愛你", "愛してる", "사랑해", "ང་ཁྱེད་ལ་དགའ།", "Kuv hlub koj", "እወድሻለሁ", "Nakupenda", "Mo nifẹ rẹ", "A hụrụ m gị n'anya", "Ina son ki", "Waan ku jeclahay", "Ndinokuda", "Ndimakukonda", "Ndagukunda", "Nalingi yo", "Tiako ianao", "Mwen renmen ou", "Mi love yuh", "Ou te alofa ia te oe", "Aroha ahau ki a koe", "Aloha wau iā ʻoe", "ʻOku ou 'ofa 'i a koe", "Au domici iko", "Qanta munakuyki", "Rohayhu", "Nimitztlazohtla", "Munsmawa", "Mi amas vin", "ᓇᒡᓕᒌᓇᖅᑐᒍ", "Te quiero", "Ba m t'aime", "Amo-te", "Ik zie je graag", "ମୁଁ ତୁମକୁ ଭଲ ପାଏ"];
-
-    var OUTLINE_POOL = ["I love you", "Ngiyakuthanda", "Ndiyakuthanda", "Ke a o rata", "Ke a go rata", "Ndi a ni funa", "Ndza ku rhandza", "Ngiyakutsandza", "Ngiyakuthandza", "Te amo", "Eu te amo", "Je t'aime", "Ti amo", "Ich liebe dich", "Ik hou van jou", "Jag älskar dig", "Jeg elsker deg", "Jeg elsker dig", "Ég elska þig", "Eg elski teg", "Tá grá agam duit", "Rwy'n dy garu di", "My a'th kar", "Ta graih aym ort", "Mun ráhkistan du", "Asavakkit", "Ik hâld fan dy", "Ma armastan sind", "Es tevi mīlu", "Aš tave myliu", "Kocham cię", "Miluji tě", "Ľúbim ťa", "Szeretlek", "Te iubesc", "Обичам те", "Волим те", "Volim te", "Ljubim te", "Те сакам", "Të dua", "Σ' αγαπώ", "T'estimo", "Maite zaitut", "Quérote", "T'aimi", "Inħobbok", "Я тебя люблю", "Я тебе люблю", "Я цябе кахаю", "Seni seviyorum", "Səni sevirəm", "Men seni sevaman", "Мен сени сүйөм", "Мин сине яратам", "მე მიყვარხარ", "Ես սիրում եմ քեզ", "Би чамд хайртай", "أحبك", "دوستت دارم", "אני אוהב אותך", "איך ליב דיך", "මම ඔයාට ආදරෙයි", "ฉันรักเธอ", "ຂ້ອຍຮັກເຈົ້າ", "ខ្ញុំស្រលាញ់អ្នក", "မင်းကိုချစ်တယ်", "Anh yêu em", "Aku cinta kamu", "Saya sayang kamu", "Mahal kita", "Aku tresna kowe", "我爱你", "我愛你", "愛してる", "사랑해", "ང་ཁྱེད་ལ་དགའ།", "Kuv hlub koj", "እወድሻለሁ", "Nakupenda", "Mo nifẹ rẹ", "Ina son ki", "Waan ku jeclahay", "Ndinokuda", "Ndimakukonda", "Ndagukunda", "Nalingi yo", "Tiako ianao", "Mwen renmen ou", "Mi love yuh", "Aloha wau iā ʻoe", "Au domici iko", "Qanta munakuyki", "Rohayhu", "Nimitztlazohtla", "Munsmawa", "Mi amas vin", "ᓇᒡᓕᒌᓇᖅᑐᒍ", "Te quiero", "Ba m t'aime", "Amo-te", "Ik zie je graag", "ମୁଁ ତୁମକୁ ଭଲ ପାଏ"];;
+    var OUTLINE_POOL = ["I love you", "Ngiyakuthanda", "Ndiyakuthanda", "Ke a o rata", "Ke a go rata", "Ndi a ni funa", "Ndza ku rhandza", "Ngiyakutsandza", "Ngiyakuthandza", "Te amo", "Eu te amo", "Je t'aime", "Ti amo", "Ich liebe dich", "Ik hou van jou", "Jag älskar dig", "Jeg elsker deg", "Jeg elsker dig", "Ég elska þig", "Eg elski teg", "Tá grá agam duit", "Rwy'n dy garu di", "My a'th kar", "Ta graih aym ort", "Mun ráhkistan du", "Asavakkit", "Ik hâld fan dy", "Ma armastan sind", "Es tevi mīlu", "Aš tave myliu", "Kocham cię", "Miluji tě", "Ľúbim ťa", "Szeretlek", "Te iubesc", "Обичам те", "Волим те", "Volim te", "Ljubim te", "Те сакам", "Të dua", "Σ' αγαπώ", "T'estimo", "Maite zaitut", "Quérote", "T'aimi", "Inħobbok", "Я тебя люблю", "Я тебе люблю", "Я цябе кахаю", "Seni seviyorum", "Səni sevirəm", "Men seni sevaman", "Мен сени сүйөм", "Мин сине яратам", "მე მიყვარხარ", "Ես սիրում եմ քեզ", "Би чамд хайртай", "أحبك", "دوستت دارم", "אני אוהב אותך", "איך ליב דיך", "මම ඔයාට ආදරෙයි", "ฉันรักเธอ", "ຂ້ອຍຮັກເຈົ້າ", "ខ្ញុំស្រលាញ់អ្នក", "မင်းကိုချစ်တယ်", "Anh yêu em", "Aku cinta kamu", "Saya sayang kamu", "Mahal kita", "Aku tresna kowe", "我爱你", "我愛你", "愛してる", "사랑해", "ང་ཁྱེད་ལ་དགའ།", "Kuv hlub koj", "እወድሻለሁ", "Nakupenda", "Mo nifẹ rẹ", "Ina son ki", "Waan ku jeclahay", "Ndinokuda", "Ndimakukonda", "Ndagukunda", "Nalingi yo", "Tiako ianao", "Mwen renmen ou", "Mi love yuh", "Aloha wau iā ʻoe", "Au domici iko", "Qanta munakuyki", "Rohayhu", "Nimitztlazohtla", "Munsmawa", "Mi amas vin", "ᓇᒡᓕᒌᓇᖅᑐᒍ", "Te quiero", "Ba m t'aime", "Amo-te", "Ik zie je graag", "ମୁଁ ତୁମକୁ ଭଲ ପାଏ"];
+    var FONT_STACK = '"Noto Sans","Noto Sans Arabic","Noto Sans Hebrew","Noto Sans Devanagari","Noto Sans Bengali","Noto Sans Gurmukhi","Noto Sans Gujarati","Noto Sans Tamil","Noto Sans Telugu","Noto Sans Kannada","Noto Sans Malayalam","Noto Sans Sinhala","Noto Sans Thai","Noto Sans Lao","Noto Sans Khmer","Noto Sans Myanmar","Noto Sans JP","Noto Sans KR","Noto Sans SC","Noto Sans TC","Noto Sans Armenian","Noto Sans Georgian","Noto Sans Ethiopic","Noto Sans Tibetan","Noto Sans Canadian Aboriginal",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
+    var FONT_CSS = '600 16px ' + FONT_STACK;
 
     var wrap = document.getElementById("wrap");
     var canvas = document.getElementById("c");
@@ -110,8 +80,8 @@
 
     var dpr = 1, W = 0, H = 0;
     var words = [], stars = [], layoutMeta = null;
-    var animId = null, startTime = 0, phase = "idle", completeAt = 0;
-    var phraseIndex = 0, outlineIndex = 0, running = false;
+    var animId = null, startTime = 0, phase = "idle", completeAt = 0, running = false;
+    var phraseIndex = 0;
 
     var HX = 16, HY_TOP = 12.5, HY_BOT = -17;
     var H_W = 32, H_H = HY_TOP - HY_BOT;
@@ -149,36 +119,29 @@
 
     function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
-    var coverageQueue = [];
-    function reshuffleCoverage() {
-      coverageQueue = PHRASES.slice();
-      for (var i = coverageQueue.length - 1; i > 0; i--) {
+    function shuffle(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
         var j = (Math.random() * (i + 1)) | 0;
-        var tmp = coverageQueue[i]; coverageQueue[i] = coverageQueue[j]; coverageQueue[j] = tmp;
+        var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
       }
-    }
-    function nextCoverage() {
-      if (!coverageQueue.length) reshuffleCoverage();
-      return coverageQueue.shift();
-    }
-    function nextOutline() {
-      // Prefer short phrases for outline; still draw from full coverage when possible
-      var p = OUTLINE_POOL[outlineIndex % OUTLINE_POOL.length];
-      outlineIndex++;
-      return p;
-    }
-    function nextPhrase() {
-      return nextCoverage();
+      return arr;
     }
 
     function measure(text, size, weight) {
-      ctx.font = weight + " " + size + "px 'Noto Sans','Noto Sans Arabic','Noto Sans Hebrew','Noto Sans Devanagari','Noto Sans Bengali','Noto Sans Gurmukhi','Noto Sans Gujarati','Noto Sans Tamil','Noto Sans Telugu','Noto Sans Kannada','Noto Sans Malayalam','Noto Sans Sinhala','Noto Sans Thai','Noto Sans Lao','Noto Sans Khmer','Noto Sans Myanmar','Noto Sans JP','Noto Sans KR','Noto Sans SC','Noto Sans TC','Noto Sans Armenian','Noto Sans Georgian','Noto Sans Ethiopic','Noto Sans Tibetan','Noto Sans Canadian Aboriginal',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif";
+      ctx.font = weight + " " + size + "px " + FONT_STACK;
       return ctx.measureText(text).width;
     }
 
-    function inClearEllipse(mx, my, rx, ry) {
-      var dx = mx / rx, dy = (my - 0.3) / ry;
-      return dx * dx + dy * dy < 1;
+    function boxesOverlap(a, b, pad) {
+      return !(a.x2 + pad < b.x1 || a.x1 - pad > b.x2 || a.y2 + pad < b.y1 || a.y1 - pad > b.y2);
+    }
+
+    function preloadScriptFonts() {
+      if (!document.fonts || !document.fonts.load) return Promise.resolve();
+      var loads = PHRASES.map(function (p) {
+        return document.fonts.load(FONT_CSS, p).catch(function () {});
+      });
+      return Promise.all(loads).then(function () { return document.fonts.ready; });
     }
 
     function layout() {
@@ -193,286 +156,376 @@
 
       var isNarrow = W < 560;
       var isLandscape = W > H * 1.05;
-      var topPad = Math.max(10, H * 0.035);
-      var botPad = Math.max(26, H * 0.065);
+      var topPad = Math.max(8, H * 0.03);
+      var botPad = Math.max(24, H * 0.06);
       var availH = H - topPad - botPad;
 
-      // Heart ~88% of viewport width, but leave margin so word glyphs don't hit edges.
-      // Effective outline target ≈ 88% W; scale accounts for typical half-word (~28–40px).
-      var margin = isNarrow ? Math.max(18, W * 0.055) : Math.max(20, W * 0.04);
-      var targetOuterW = W * 0.88;
-      var scaleByW = (targetOuterW - margin * 0.15) / H_W;
-      // Slightly smaller on narrow so half-words fit inside padding
-      if (isNarrow) scaleByW *= 0.90;
-      var scaleByH = (availH * (isLandscape ? 0.9 : 0.88)) / H_H;
+      var margin = isNarrow ? Math.max(12, W * 0.04) : Math.max(16, W * 0.035);
+      var scaleByW = (W * 0.90) / H_W;
+      if (isNarrow) scaleByW *= 0.96;
+      var scaleByH = (availH * 0.92) / H_H;
       var scale = Math.min(scaleByW, scaleByH);
 
       var heartPixelW = H_W * scale;
-      var heartPixelH = H_H * scale;
       var midYMath = (HY_TOP + HY_BOT) / 2;
       var visualCenterY = topPad + availH / 2;
       var cx = W / 2;
       var cy = visualCenterY + midYMath * scale;
+      var edgePad = Math.max(4, margin * 0.45);
 
-      // Smaller, crisper type on phones
-      var outlineSize = Math.max(5.2, Math.min(
-        isNarrow ? 6.8 : (isLandscape ? 8.8 : 10.5),
-        heartPixelW / (isNarrow ? 64 : 54)
-      ));
-      var fillSize = outlineSize * 0.78;
-
-      var outlineCount = Math.round(heartPixelW / (isNarrow ? 7.0 : 7.2));
-      outlineCount = Math.max(isNarrow ? 80 : 90, Math.min(isNarrow ? 120 : 140, outlineCount));
-
-      // Wide elliptical keep-out for ADELEIN (must fully clear the name + glow)
-      var clearRx = isNarrow ? 9.8 : 9.2;
-      var clearRy = isNarrow ? 4.6 : 4.4;
-      if (isLandscape) { clearRx = 9.0; clearRy = 4.2; }
-
-      var nameSizePx = Math.max(20, Math.min(
-        isNarrow ? 32 : 58,
-        heartPixelW * (isNarrow ? 0.118 : 0.12)
-      ));
-      // Ensure name fits in width
+      // ADELEIN size first, then tight clear zone hugging the name
+      var nameSizePx = Math.max(22, Math.min(isNarrow ? 34 : 56, heartPixelW * 0.125));
       nameEl.style.fontSize = nameSizePx + "px";
-      nameEl.style.letterSpacing = (isNarrow ? 0.12 : 0.16) + "em";
-      nameEl.style.textIndent = (isNarrow ? 0.12 : 0.16) + "em";
+      nameEl.style.letterSpacing = (isNarrow ? 0.1 : 0.14) + "em";
+      nameEl.style.textIndent = (isNarrow ? 0.1 : 0.14) + "em";
       nameEl.style.left = cx + "px";
       nameEl.style.top = visualCenterY + "px";
-      // Shrink name if wider than clear zone
-      var nameW = nameEl.getBoundingClientRect().width;
-      var maxNameW = clearRx * 2 * scale * 0.92;
-      if (nameW > maxNameW && nameW > 0) {
-        nameSizePx *= maxNameW / nameW;
-        nameEl.style.fontSize = nameSizePx + "px";
+      var nameRect = nameEl.getBoundingClientRect();
+      var nameW = Math.max(nameRect.width, nameSizePx * 4.2);
+      var nameH = Math.max(nameRect.height, nameSizePx * 1.15);
+      // Tight AABB hug around ADELEIN (only a few px padding)
+      var padX = isNarrow ? 2 : 3;
+      var padY = isNarrow ? 1 : 2;
+      var clearBox = {
+        x1: cx - nameW / 2 - padX,
+        x2: cx + nameW / 2 + padX,
+        y1: visualCenterY - nameH / 2 - padY,
+        y2: visualCenterY + nameH / 2 + padY
+      };
+      // Keep rx/ry for soft glow sizing only (tight)
+      var clearRx = (nameW / 2 + padX) / scale;
+      var clearRy = (nameH / 2 + padY) / scale;
+
+      function toScreen(mx, my) {
+        return { x: cx + mx * scale, y: cy - my * scale };
+      }
+      function inClear(mx, my) {
+        var scr = toScreen(mx, my);
+        return scr.x >= clearBox.x1 && scr.x <= clearBox.x2 && scr.y >= clearBox.y1 && scr.y <= clearBox.y2;
+      }
+      function wordHitsClear(box) {
+        return !(box.x2 < clearBox.x1 || box.x1 > clearBox.x2 || box.y2 < clearBox.y1 || box.y1 > clearBox.y2);
       }
 
-      var edgePad = Math.max(8, margin * 0.7);
-
       stars = [];
-      for (var s = 0, sc = Math.floor((W * H) / 12000); s < sc; s++) {
+      for (var s = 0, sc = Math.floor((W * H) / 14000); s < sc; s++) {
         stars.push({
           x: Math.random() * W, y: Math.random() * H,
-          r: Math.random() * 1.15 + 0.2,
-          a: Math.random() * 0.4 + 0.1,
+          r: Math.random() * 1.1 + 0.2,
+          a: Math.random() * 0.35 + 0.1,
           tw: Math.random() * Math.PI * 2,
           sp: 0.4 + Math.random() * 1.1
         });
       }
 
-      var outlinePoly = buildOutline(360);
+      var outlinePoly = buildOutline(420);
       words = [];
       phraseIndex = 0;
-      outlineIndex = 0;
-      reshuffleCoverage();
+      var placedBoxes = [];
+      var must = shuffle(PHRASES.slice());
+      var cyclePool = shuffle(OUTLINE_POOL.slice().concat(PHRASES.slice()));
 
-      function toScreen(mx, my) {
-        return { x: cx + mx * scale, y: cy - my * scale };
-      }
+      // Font size ladder: larger first, then pack smaller until dense
+      var sizeLadder = isNarrow
+        ? [18, 15, 13, 12, 11, 10.5, 10, 9.5]
+        : (isLandscape ? [18, 15, 13, 12, 11, 10, 9.5] : [20, 17, 15, 13, 12, 11, 10, 9.5]);
 
-      function tooClose(mx, my, minD) {
-        for (var i = 0; i < words.length; i++) {
-          if (Math.hypot(words[i].mx - mx, words[i].my - my) < minD) return true;
+      function tryPlace(text, size, mx, my, kind) {
+        if (inClear(mx, my)) return false;
+        var scr = toScreen(mx, my);
+        var weight = kind === "outline" ? 600 : 600;
+        var tw = measure(text, size, weight);
+        var th = size * 1.05;
+        var box = {
+          x1: scr.x - tw / 2, x2: scr.x + tw / 2,
+          y1: scr.y - th / 2, y2: scr.y + th / 2
+        };
+        if (box.x1 < edgePad || box.x2 > W - edgePad || box.y1 < edgePad || box.y2 > H - edgePad) return false;
+        if (wordHitsClear(box)) return false;
+        // Word center must stay inside heart (and most of box)
+        if (!insideHeart(mx, my, outlinePoly)) return false;
+        // Heavy overlap allowed — we want a solid wall
+        var pad = -size * 0.35;
+        for (var i = 0; i < placedBoxes.length; i++) {
+          if (boxesOverlap(box, placedBoxes[i], pad)) return false;
         }
-        return false;
+        var opacity = 0.88 + Math.random() * 0.12;
+        words.push({
+          text: text, mx: mx, my: my, x: scr.x, y: scr.y,
+          size: size, weight: weight, halfW: tw / 2, halfH: th / 2,
+          kind: kind, opacity: opacity, delay: 0
+        });
+        placedBoxes.push(box);
+        return true;
       }
 
-      // Coverage-first placement: every language appears at least once
-      var slots = [];
-      var N = 1000, samples = [], arc = [0];
+      // 1) Dense outline for crisp silhouette — larger type, short phrases
+      var outlineN = Math.round(heartPixelW / (isNarrow ? 4.2 : 4.0));
+      outlineN = Math.max(120, Math.min(220, outlineN));
+      var N = 1200, samples = [], arc = [0];
       for (var i = 0; i < N; i++) samples.push(heartXY((i / N) * Math.PI * 2));
       for (var i = 1; i < N; i++) {
         arc.push(arc[i - 1] + Math.hypot(samples[i].x - samples[i - 1].x, samples[i].y - samples[i - 1].y));
       }
       var totalArc = arc[N - 1] + Math.hypot(samples[0].x - samples[N - 1].x, samples[0].y - samples[N - 1].y);
-
-      for (var k = 0; k < outlineCount; k++) {
-        var target = (k / outlineCount) * totalArc;
+      var oi = 0;
+      for (var k = 0; k < outlineN; k++) {
+        var target = (k / outlineN) * totalArc;
         var lo = 0, hi = N - 1;
         while (lo < hi) {
           var mid = (lo + hi) >> 1;
           if (arc[mid] < target) lo = mid + 1; else hi = mid;
         }
         var p = samples[lo];
-        var mx = p.x * 0.97, my = p.y * 0.97;
-        if (inClearEllipse(mx, my, clearRx * 0.8, clearRy * 0.8)) continue;
-        var scr = toScreen(mx, my);
-        if (scr.x < edgePad || scr.x > W - edgePad || scr.y < edgePad || scr.y > H - edgePad) continue;
-        slots.push({ mx: mx, my: my, x: scr.x, y: scr.y, size: outlineSize, weight: 600, kind: "outline", nearShoulder: Math.abs(mx) > 11 });
+        var mx = p.x * 0.985, my = p.y * 0.985;
+        if (inClear(mx, my)) continue;
+        var size = sizeLadder[0] * (Math.abs(mx) > 12 ? 0.85 : 1);
+        size = Math.max(9.5, Math.min(sizeLadder[0], size));
+        var text = OUTLINE_POOL[oi++ % OUTLINE_POOL.length];
+        if (!tryPlace(text, size, mx, my, "outline")) {
+          tryPlace(OUTLINE_POOL[oi++ % OUTLINE_POOL.length], Math.max(9.5, size * 0.85), mx, my, "outline");
+        }
       }
 
-      var rings = isNarrow ? [0.74, 0.52, 0.32] : (isLandscape ? [0.74, 0.5, 0.3] : [0.78, 0.58, 0.4, 0.24]);
-      rings.forEach(function (fs) {
-        var count = Math.max(12, Math.round(outlineCount * fs * (isNarrow ? 0.45 : 0.48)));
-        for (var k = 0; k < count; k++) {
-          var t = ((k + 0.35) / count) * Math.PI * 2;
-          var p = heartXY(t);
-          var mx = p.x * fs, my = p.y * fs;
-          if (inClearEllipse(mx, my, clearRx, clearRy)) continue;
-          var scr = toScreen(mx, my);
-          if (scr.x < edgePad || scr.x > W - edgePad) continue;
-          slots.push({ mx: mx, my: my, x: scr.x, y: scr.y, size: fillSize, weight: 500, kind: "fill", nearShoulder: false });
-        }
-      });
-
-      if (!isLandscape) {
-        var latStep = isNarrow ? 1.9 : 2.15;
-        for (var my = HY_BOT + 1.5; my <= HY_TOP - 1.5; my += latStep) {
-          for (var mx = -HX + 1.5; mx <= HX - 1.5; mx += latStep) {
+      // 2) Coverage-first fill at large sizes, then pack repeats at decreasing sizes
+      function candidatePoints(step) {
+        var pts = [];
+        for (var my = HY_BOT + 0.4; my <= HY_TOP - 0.3; my += step) {
+          for (var mx = -HX + 0.4; mx <= HX - 0.4; mx += step) {
             if (!insideHeart(mx, my, outlinePoly)) continue;
-            if (inClearEllipse(mx, my, clearRx, clearRy)) continue;
-            var scr = toScreen(mx, my);
-            if (scr.x < edgePad || scr.x > W - edgePad) continue;
-            slots.push({ mx: mx, my: my, x: scr.x, y: scr.y, size: fillSize * 0.88, weight: 500, kind: "fill", nearShoulder: false });
+            if (inClear(mx, my)) continue;
+            pts.push({ mx: mx, my: my });
+          }
+        }
+        // Also concentric rings for silhouette depth
+        for (var fs = 0.92; fs >= 0.18; fs -= 0.07) {
+          var count = Math.round(70 * fs + 20);
+          for (var k = 0; k < count; k++) {
+            var t = ((k + 0.3) / count) * Math.PI * 2;
+            var p = heartXY(t);
+            var mx = p.x * fs, my = p.y * fs;
+            if (inClear(mx, my)) continue;
+            if (insideHeart(mx, my, outlinePoly)) pts.push({ mx: mx, my: my });
+          }
+        }
+        return shuffle(pts);
+      }
+
+      // Place every language once at a solid size
+      var coverPts = candidatePoints(isNarrow ? 1.1 : 1.3);
+      var ci = 0;
+      for (var pi = 0; pi < must.length; pi++) {
+        var text = must[pi];
+        var size = text.length > 18 ? sizeLadder[3] : sizeLadder[2];
+        size = Math.max(10, size);
+        var placed = false;
+        for (var tries = 0; tries < coverPts.length && !placed; tries++) {
+          var pt = coverPts[(ci + tries) % coverPts.length];
+          if (tryPlace(text, size, pt.mx, pt.my, "fill")) {
+            placed = true; ci += tries + 1;
+          }
+        }
+        if (!placed) {
+          for (var tries = 0; tries < coverPts.length && !placed; tries++) {
+            var pt = coverPts[(ci + tries) % coverPts.length];
+            if (tryPlace(text, 10, pt.mx, pt.my, "fill")) {
+              placed = true; ci += tries + 1;
+            }
           }
         }
       }
 
-      slots.sort(function (a, b) {
+      // Real ink fill: stamp words onto offscreen buffer and sample heart pixels
+      function estimateFill() {
+        var oc = document.createElement("canvas");
+        oc.width = Math.max(1, Math.round(W * 0.5));
+        oc.height = Math.max(1, Math.round(H * 0.5));
+        var octx = oc.getContext("2d");
+        var sx = oc.width / W, sy = oc.height / H;
+        octx.setTransform(sx, 0, 0, sy, 0, 0);
+        octx.clearRect(0, 0, W, H);
+        octx.textAlign = "center";
+        octx.textBaseline = "middle";
+        octx.fillStyle = "#ff0000";
+        for (var i = 0; i < words.length; i++) {
+          var w = words[i];
+          octx.globalAlpha = 1;
+          octx.font = w.weight + " " + w.size + "px " + FONT_STACK;
+          octx.fillText(w.text, w.x, w.y);
+        }
+        var img = octx.getImageData(0, 0, oc.width, oc.height);
+        var data = img.data;
+        var hit = 0, tot = 0;
+        var step = 2;
+        for (var py = 0; py < oc.height; py += step) {
+          for (var px = 0; px < oc.width; px += step) {
+            var x = px / sx, y = py / sy;
+            var mx = (x - cx) / scale;
+            var my = -((y - cy) / scale);
+            if (!insideHeart(mx, my, outlinePoly)) continue;
+            if (inClear(mx, my)) continue;
+            tot++;
+            var idx = (py * oc.width + px) * 4;
+            if (data[idx] > 40) hit++;
+          }
+        }
+        return tot ? hit / tot : 0;
+      }
+
+      for (var si = 0; si < sizeLadder.length; si++) {
+        var size = sizeLadder[si];
+        if (size < 9.5) continue;
+        var step = size / scale * 0.28;
+        step = Math.max(0.35, Math.min(1.2, step));
+        var pts = candidatePoints(step);
+        var pi = 0;
+        for (var i = 0; i < pts.length; i++) {
+          var text = cyclePool[pi++ % cyclePool.length];
+          // Prefer shorter on outline-ish outer band
+          var r = Math.hypot(pts[i].mx / 16, pts[i].my / 14);
+          if (r > 0.85 && text.length > 14) text = OUTLINE_POOL[pi % OUTLINE_POOL.length];
+          tryPlace(text, size, pts[i].mx, pts[i].my, r > 0.88 ? "outline" : "fill");
+        }
+        // continue all ladder sizes for density
+      }
+
+      // Final micro-pack at 9.5–10px if still below target
+      var fillEst = estimateFill();
+      // Brute-force pack until pixel fill >= 0.88 or caps
+      var fillEst = 0;
+      var minWords = isNarrow ? 320 : 520;
+      var guard = 0;
+      while (guard < 12) {
+        guard++;
+        var sz = guard < 4 ? 11 : (guard < 8 ? 10 : 9.5);
+        var pts = candidatePoints(guard < 6 ? 0.42 : 0.32);
+        var pi = (guard * 17) % cyclePool.length;
+        var before = words.length;
+        for (var i = 0; i < pts.length; i++) {
+          var text = cyclePool[pi++ % cyclePool.length];
+          tryPlace(text, sz, pts[i].mx, pts[i].my, "fill");
+        }
+        // Also stamp along many concentric rings
+        for (var fs = 0.96; fs >= 0.12; fs -= 0.04) {
+          var count = Math.round(100 * fs + 40);
+          for (var k = 0; k < count; k++) {
+            var t = ((k + guard * 0.07) / count) * Math.PI * 2;
+            var p = heartXY(t);
+            tryPlace(cyclePool[pi++ % cyclePool.length], sz, p.x * fs, p.y * fs, fs > 0.9 ? "outline" : "fill");
+          }
+        }
+        fillEst = estimateFill();
+        if (fillEst >= 0.88 && words.length >= minWords) break;
+        if (words.length === before) {
+          // loosen collision by clearing pad further — inject with ignore-overlap for tiny stamps
+          break;
+        }
+      }
+      // Absolute density pass: place ignoring collision except exact center clear
+      if (fillEst < 0.88 || words.length < minWords) {
+        var pi = 0;
+        for (var fs = 0.98; fs >= 0.1 && words.length < (isNarrow ? 2800 : 4000); fs -= 0.035) {
+          var count = Math.round(130 * fs + 50);
+          for (var k = 0; k < count; k++) {
+            if (words.length > (isNarrow ? 2800 : 4000)) break;
+            var t = (k / count) * Math.PI * 2 + fs;
+            var p = heartXY(t);
+            var mx = p.x * fs, my = p.y * fs;
+            if (inClear(mx, my)) continue;
+            if (!insideHeart(mx, my, outlinePoly)) continue;
+            var scr = toScreen(mx, my);
+            var text = cyclePool[pi++ % cyclePool.length];
+            var size = fs > 0.9 ? 12 : (fs > 0.5 ? 11 : 10);
+            var tw = measure(text, size, 600);
+            if (scr.x - tw / 2 < edgePad || scr.x + tw / 2 > W - edgePad) {
+              text = OUTLINE_POOL[pi % OUTLINE_POOL.length];
+              tw = measure(text, size, 600);
+              if (scr.x - tw / 2 < edgePad || scr.x + tw / 2 > W - edgePad) continue;
+            }
+            words.push({
+              text: text, mx: mx, my: my, x: scr.x, y: scr.y,
+              size: size, weight: 600, halfW: tw / 2, halfH: size * 0.52,
+              kind: fs > 0.9 ? "outline" : "fill",
+              opacity: 0.9 + Math.random() * 0.1, delay: 0
+            });
+          }
+        }
+        fillEst = estimateFill();
+      }
+
+      // Extra bottom-lobe + tip densify — SHORT phrases only, ignore collision
+      {
+        var shorts = OUTLINE_POOL.filter(function (p) { return p.length <= 12; });
+        if (!shorts.length) shorts = OUTLINE_POOL;
+        var pi = 0;
+        function forceStamp(mx, my, size) {
+          if (words.length > (isNarrow ? 2800 : 4000)) return;
+          if (!insideHeart(mx, my, outlinePoly)) return;
+          if (inClear(mx, my)) return;
+          var scr = toScreen(mx, my);
+          var text = shorts[pi++ % shorts.length];
+          var tw = measure(text, size, 600);
+          if (scr.x - tw / 2 < 1 || scr.x + tw / 2 > W - 1) {
+            text = shorts[pi++ % shorts.length];
+            tw = measure(text, size, 600);
+            if (scr.x - tw / 2 < 1 || scr.x + tw / 2 > W - 1) return;
+          }
+          var box = { x1: scr.x - tw/2, x2: scr.x + tw/2, y1: scr.y - size/2, y2: scr.y + size/2 };
+          if (wordHitsClear(box)) return;
+          words.push({
+            text: text, mx: mx, my: my, x: scr.x, y: scr.y,
+            size: size, weight: 600, halfW: tw / 2, halfH: size * 0.55,
+            kind: "fill", opacity: 0.95, delay: 0
+          });
+        }
+        for (var my = HY_BOT + 0.15; my < 4; my += 0.22) {
+          for (var mx = -HX + 0.15; mx <= HX - 0.15; mx += 0.24) {
+            var size = my < -12 ? 13 : (my < -6 ? 14 : 12);
+            forceStamp(mx, my, size);
+          }
+        }
+        for (var fs = 1.0; fs >= 0.06; fs -= 0.025) {
+          var count = Math.round(140 * fs + 60);
+          for (var k = 0; k < count; k++) {
+            var t = (k / count) * Math.PI * 2;
+            var p = heartXY(t);
+            if (p.y > 3 && fs < 0.85) continue; // bias lower
+            forceStamp(p.x * fs, p.y * fs, fs > 0.9 ? 14 : 12);
+          }
+        }
+        fillEst = estimateFill();
+      }
+
+      // Stagger animation — fast so dense heart completes quickly
+      words.sort(function (a, b) {
         if (a.kind !== b.kind) return a.kind === "outline" ? -1 : 1;
         return Math.hypot(b.mx, b.my) - Math.hypot(a.mx, a.my);
       });
-      var kept = [];
-      for (var i = 0; i < slots.length; i++) {
-        var s = slots[i];
-        var minD = s.kind === "outline" ? (isNarrow ? 0.95 : 0.85) : (isNarrow ? 1.25 : 1.4);
-        var ok = true;
-        for (var j = 0; j < kept.length; j++) {
-          if (Math.hypot(kept[j].mx - s.mx, kept[j].my - s.my) < minD) { ok = false; break; }
-        }
-        if (ok) kept.push(s);
-      }
-      slots = kept;
-
-      reshuffleCoverage();
-      var must = coverageQueue.slice();
-      coverageQueue = [];
-      var outlineWords = [];
-      var fillWords = [];
-      words = [];
-
-      function placeAt(slot, text) {
-        var size = slot.size * (slot.nearShoulder ? 0.88 : 1);
-        var tw = measure(text, size, slot.weight);
-        var tries = 0;
-        while ((slot.x - tw / 2 < edgePad || slot.x + tw / 2 > W - edgePad) && tries < 4) {
-          size *= 0.82;
-          tw = measure(text, size, slot.weight);
-          tries++;
-        }
-        if (slot.x - tw / 2 < 2 || slot.x + tw / 2 > W - 2) return false;
-        var w = {
-          text: text, mx: slot.mx, my: slot.my, x: slot.x, y: slot.y,
-          size: Math.max(4.8, size), weight: slot.weight, halfW: tw / 2, kind: slot.kind, delay: 0
-        };
-        words.push(w);
-        if (slot.kind === "outline") outlineWords.push(w); else fillWords.push(w);
-        return true;
-      }
-
-      var free = slots.slice();
-      var unplaced = [];
-      for (var pi = 0; pi < must.length; pi++) {
-        var text = must[pi];
-        var order = free.slice();
-        order.sort(function (a, b) {
-          var long = text.length > 16;
-          var score = function (s) {
-            var sc = 0;
-            if (long) { sc += (s.kind === "fill" ? 5 : 0); sc += (8 - Math.abs(s.mx)); }
-            else { sc += (s.kind === "outline" ? 5 : 0); }
-            return sc;
-          };
-          return score(b) - score(a);
-        });
-        var placed = false;
-        for (var si = 0; si < order.length; si++) {
-          if (placeAt(order[si], text)) {
-            free = free.filter(function (s) { return s !== order[si]; });
-            placed = true;
-            break;
-          }
-        }
-        if (!placed) unplaced.push(text);
-      }
-
-      // Extra overflow slots on a slightly inset ring for any still-unplaced languages
-      if (unplaced.length) {
-        var extraN = Math.max(unplaced.length + 8, 40);
-        for (var k = 0; k < extraN && unplaced.length; k++) {
-          var t = (k / extraN) * Math.PI * 2;
-          var p = heartXY(t);
-          var mx = p.x * 0.88, my = p.y * 0.88;
-          if (inClearEllipse(mx, my, clearRx * 0.9, clearRy * 0.9)) continue;
-          var scr = toScreen(mx, my);
-          var text = unplaced[0];
-          var size = Math.max(4.8, fillSize * 0.85);
-          var tw = measure(text, size, 500);
-          var guard = 0;
-          while ((scr.x - tw / 2 < 2 || scr.x + tw / 2 > W - 2) && guard < 5) {
-            size *= 0.8; tw = measure(text, size, 500); guard++;
-          }
-          if (scr.x - tw / 2 < 1 || scr.x + tw / 2 > W - 1) continue;
-          var w = {
-            text: text, mx: mx, my: my, x: scr.x, y: scr.y,
-            size: size, weight: 500, halfW: tw / 2, kind: "fill", delay: 0
-          };
-          words.push(w);
-          fillWords.push(w);
-          unplaced.shift();
-        }
-      }
-      // Absolute last resort: place remaining at visual centre ring with tiny type
-      for (var ui = 0; ui < unplaced.length; ui++) {
-        var text = unplaced[ui];
-        var ang = (ui / Math.max(1, unplaced.length)) * Math.PI * 2;
-        var mx = Math.cos(ang) * 6.5, my = Math.sin(ang) * 4.2 + 0.5;
-        if (inClearEllipse(mx, my, clearRx * 0.75, clearRy * 0.75)) {
-          mx *= 1.35; my *= 1.35;
-        }
-        var scr = toScreen(mx, my);
-        var size = 4.8;
-        var tw = measure(text, size, 500);
-        words.push({
-          text: text, mx: mx, my: my, x: Math.min(W - 4, Math.max(4, scr.x)),
-          y: scr.y, size: size, weight: 500, halfW: Math.min(tw / 2, W / 2 - 4),
-          kind: "fill", delay: 0
-        });
-        fillWords.push(words[words.length - 1]);
-      }
-
-      var cycle = 0;
-      for (var si = 0; si < free.length; si++) {
-        placeAt(free[si], OUTLINE_POOL[cycle++ % OUTLINE_POOL.length]);
-      }
-
-      fillWords.sort(function (a, b) {
-        return Math.hypot(b.mx, b.my) - Math.hypot(a.mx, a.my);
-      });
-
       var t0 = 0;
-      var outlineStep = isNarrow ? 28 : 34;
-      outlineWords.forEach(function (w, i) { w.delay = t0 + i * outlineStep; });
-      t0 += outlineWords.length * outlineStep + 120;
-      var fillStep = isNarrow ? 16 : 20;
-      fillWords.forEach(function (w, i) { w.delay = t0 + i * fillStep; });
+      var stepMs = Math.max(4, Math.min(12, 5000 / Math.max(1, words.length)));
+      for (var i = 0; i < words.length; i++) {
+        words[i].delay = t0 + i * stepMs;
+      }
 
-      words = outlineWords.concat(fillWords);
       layoutMeta = {
         cx: cx, cy: cy, scale: scale,
         visualCenterY: visualCenterY,
         clearRx: clearRx, clearRy: clearRy,
-        duration: t0 + fillWords.length * fillStep + 450,
-        edgePad: edgePad
+        duration: t0 + words.length * stepMs + 400,
+        edgePad: edgePad,
+        fillEst: fillEst,
+        wordCount: words.length
       };
+      document.documentElement.setAttribute("data-fill", String(Math.round(fillEst * 1000) / 1000));
+      document.documentElement.setAttribute("data-words", String(words.length));
     }
 
     function draw(now) {
       var t = now - startTime;
       ctx.clearRect(0, 0, W, H);
 
-      var g = ctx.createRadialGradient(W / 2, layoutMeta.visualCenterY, 0, W / 2, layoutMeta.visualCenterY, Math.min(W, H) * 0.38);
-      g.addColorStop(0, "rgba(220, 40, 90, 0.13)");
+      var g = ctx.createRadialGradient(W / 2, layoutMeta.visualCenterY, 0, W / 2, layoutMeta.visualCenterY, Math.min(W, H) * 0.4);
+      g.addColorStop(0, "rgba(220, 40, 90, 0.14)");
       g.addColorStop(0.55, "rgba(160, 20, 70, 0.05)");
       g.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = g;
@@ -490,87 +543,77 @@
       var beat = 1;
       if (phase === "complete") {
         var cycle = ((now - completeAt) / 1000) % 1.6;
-        if (cycle < 0.14) beat = 1 + 0.028 * Math.sin((cycle / 0.14) * Math.PI);
+        if (cycle < 0.14) beat = 1 + 0.025 * Math.sin((cycle / 0.14) * Math.PI);
         else if (cycle < 0.28) beat = 1 + 0.012 * Math.sin(((cycle - 0.14) / 0.14) * Math.PI);
       }
 
       var vx = layoutMeta.cx, vy = layoutMeta.visualCenterY;
       ctx.save();
       if (beat !== 1) {
-        ctx.translate(vx, vy);
-        ctx.scale(beat, beat);
-        ctx.translate(-vx, -vy);
+        ctx.translate(vx, vy); ctx.scale(beat, beat); ctx.translate(-vx, -vy);
       }
 
-      // Soft void + glow behind ADELEIN
+      // Soft pink bloom behind ADELEIN (no dark void)
       var glowA = phase === "complete" ? 1 : Math.min(1, t / Math.max(1, layoutMeta.duration));
       var rx = layoutMeta.clearRx * layoutMeta.scale;
       var ry = layoutMeta.clearRy * layoutMeta.scale;
-      var cg = ctx.createRadialGradient(vx, vy, 0, vx, vy, Math.max(rx, ry) * 1.25);
-      cg.addColorStop(0, "rgba(18, 6, 14," + (0.92 * glowA) + ")");
-      cg.addColorStop(0.35, "rgba(50, 10, 28," + (0.55 * glowA) + ")");
-      cg.addColorStop(0.7, "rgba(100, 20, 50," + (0.16 * glowA) + ")");
+      var cg = ctx.createRadialGradient(vx, vy, 0, vx, vy, Math.max(rx, ry) * 1.8);
+      cg.addColorStop(0, "rgba(255, 120, 150," + (0.22 * glowA) + ")");
+      cg.addColorStop(0.45, "rgba(255, 60, 100," + (0.12 * glowA) + ")");
       cg.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = cg;
       ctx.beginPath();
-      ctx.ellipse(vx, vy, rx * 1.15, ry * 1.25, 0, 0, Math.PI * 2);
+      ctx.ellipse(vx, vy, rx * 1.4, ry * 1.6, 0, 0, Math.PI * 2);
       ctx.fill();
+
+      // Crisp heart clip
+      ctx.save();
+      ctx.beginPath();
+      var outlinePts = 240;
+      for (var i = 0; i < outlinePts; i++) {
+        var hp = heartXY((i / outlinePts) * Math.PI * 2);
+        var sx = layoutMeta.cx + hp.x * layoutMeta.scale;
+        var sy = layoutMeta.cy - hp.y * layoutMeta.scale;
+        if (i === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+      }
+      ctx.closePath();
+      ctx.clip();
 
       for (var i = 0; i < words.length; i++) {
         var w = words[i];
         var local = t - w.delay;
         if (local < 0) continue;
-        var u = Math.min(1, local / 380);
+        var u = Math.min(1, local / 220);
         var e = easeOutCubic(u);
-        var alpha = e * (w.kind === "outline" ? 0.93 : 0.55);
-        var sc = 0.62 + 0.38 * e;
-        if (w.x - w.halfW * sc < 3 || w.x + w.halfW * sc > W - 3) continue;
-        // Never paint over ADELEIN's keep-out (screen-space ellipse)
-        var rx = layoutMeta.clearRx * layoutMeta.scale * 1.08;
-        var ry = layoutMeta.clearRy * layoutMeta.scale * 1.12;
-        // Reject if word center or either end of the glyph run enters the keep-out
-        function inKeep(px, py) {
-          var ndx = (px - vx) / rx, ndy = (py - vy) / ry;
-          return ndx * ndx + ndy * ndy < 1;
-        }
-        if (inKeep(w.x, w.y) || inKeep(w.x - w.halfW * sc, w.y) || inKeep(w.x + w.halfW * sc, w.y)) continue;
+        var alpha = Math.min(1, e * Math.max(0.9, w.opacity));
+        var sc = 0.9 + 0.1 * e;
 
         ctx.save();
         ctx.translate(w.x, w.y);
         ctx.scale(sc, sc);
         ctx.globalAlpha = alpha;
-        ctx.fillStyle = w.kind === "outline" ? "#ff4d6d" : "#d93658";
-        ctx.shadowColor = "rgba(255, 60, 100, 0.4)";
-        ctx.shadowBlur = w.kind === "outline" ? 7 : 3;
-        ctx.font = w.weight + " " + w.size + "px 'Noto Sans','Noto Sans Arabic','Noto Sans Hebrew','Noto Sans Devanagari','Noto Sans Bengali','Noto Sans Gurmukhi','Noto Sans Gujarati','Noto Sans Tamil','Noto Sans Telugu','Noto Sans Kannada','Noto Sans Malayalam','Noto Sans Sinhala','Noto Sans Thai','Noto Sans Lao','Noto Sans Khmer','Noto Sans Myanmar','Noto Sans JP','Noto Sans KR','Noto Sans SC','Noto Sans TC','Noto Sans Armenian','Noto Sans Georgian','Noto Sans Ethiopic','Noto Sans Tibetan','Noto Sans Canadian Aboriginal',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif";
+        ctx.fillStyle = "#ff2f5a";
+        ctx.shadowColor = "rgba(255, 45, 85, 0.7)";
+        ctx.shadowBlur = 5;
+        ctx.font = "600 " + w.size + "px " + FONT_STACK;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(w.text, 0, 0);
         ctx.restore();
       }
-      ctx.restore();
+      ctx.restore(); // clip
+      ctx.restore(); // beat
 
       if (phase === "building" && t >= layoutMeta.duration) {
         phase = "complete";
         completeAt = now;
         nameEl.classList.add("show");
-        setTimeout(function () { nameEl.classList.add("pulse"); }, 1000);
+        setTimeout(function () { nameEl.classList.add("pulse"); }, 800);
         hint.classList.add("show");
         running = false;
         document.documentElement.setAttribute("data-ready", "1");
       }
       animId = requestAnimationFrame(draw);
-    }
-
-    var FONT_CSS = '600 16px "Noto Sans","Noto Sans Arabic","Noto Sans Hebrew","Noto Sans Devanagari","Noto Sans Bengali","Noto Sans Gurmukhi","Noto Sans Gujarati","Noto Sans Tamil","Noto Sans Telugu","Noto Sans Kannada","Noto Sans Malayalam","Noto Sans Sinhala","Noto Sans Thai","Noto Sans Lao","Noto Sans Khmer","Noto Sans Myanmar","Noto Sans JP","Noto Sans KR","Noto Sans SC","Noto Sans TC","Noto Sans Armenian","Noto Sans Georgian","Noto Sans Ethiopic","Noto Sans Tibetan","Noto Sans Canadian Aboriginal",system-ui,sans-serif';
-
-    function preloadScriptFonts() {
-      if (!document.fonts || !document.fonts.load) return Promise.resolve();
-      // Force unicode-range downloads for every phrase before first paint
-      var loads = PHRASES.map(function (p) {
-        return document.fonts.load(FONT_CSS, p).catch(function () {});
-      });
-      return Promise.all(loads).then(function () { return document.fonts.ready; });
     }
 
     function play() {
@@ -590,7 +633,6 @@
     }
 
     wrap.addEventListener("click", function () { if (!running) play(); });
-
     var resizeTimer;
     function onResize() {
       clearTimeout(resizeTimer);
@@ -603,9 +645,7 @@
           nameEl.classList.add("show", "pulse");
           hint.classList.add("show");
           document.documentElement.setAttribute("data-ready", "1");
-        } else if (!running && phase !== "building") {
-          play();
-        }
+        } else if (!running && phase !== "building") play();
       }, 100);
     }
     window.addEventListener("resize", onResize);
@@ -619,5 +659,5 @@
   })();
   </script>
 </body>
-<!-- build:f711d515ed95a760 -->
+<!-- build:a3da5253c254b628 -->
 </html>
