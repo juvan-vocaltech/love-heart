@@ -68,10 +68,13 @@ canvas {
   top: calc(10px + env(safe-area-inset-top));
   left: 10px;
   display: flex;
-  gap: 6px;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  max-width: calc(100% - 8.4rem);
 }
 
-.controls button {
+.controls button,
+.controls a {
   appearance: none;
   background: transparent;
   color: #6a6a6a;
@@ -81,13 +84,18 @@ canvas {
   letter-spacing: 0.04em;
   padding: 4px 2px;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.controls button::before { content: "[ "; color: #3e3e3e; }
-.controls button::after { content: " ]"; color: #3e3e3e; }
+.controls button::before,
+.controls a::before { content: "[ "; color: #3e3e3e; }
+.controls button::after,
+.controls a::after { content: " ]"; color: #3e3e3e; }
 
 .controls button:hover,
-.controls button:focus-visible { color: #f2f2f2; }
+.controls button:focus-visible,
+.controls a:hover,
+.controls a:focus-visible { color: #f2f2f2; }
 
 button:focus-visible,
 a:focus-visible {

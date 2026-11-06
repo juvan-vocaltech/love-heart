@@ -19,7 +19,11 @@ Then visit http://127.0.0.1:8743
 - **Space** — pause / play
 - **R** — replay
 - **Left / right** — step half a second
-- The same controls sit in the upper left of the frame
+- The same controls sit in the upper left of the frame, next to **download**
+
+## Download
+
+**download** (upper left) saves [`rose.zip`](rose.zip): this page, `css/`, `js/`, `fonts/`, and this readme. Unzip it and open `rose/index.html` offline. On GitHub Pages the file is served from the site root as `/rose.zip` — for this repo, [https://juvan-vocaltech.github.io/love-heart/rose.zip](https://juvan-vocaltech.github.io/love-heart/rose.zip).
 
 `?t=8.5` opens paused at that second. Add `&play=1` to start from there.
 
