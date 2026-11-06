@@ -19,11 +19,13 @@ Then visit http://127.0.0.1:8743
 - **Space** — pause / play
 - **R** — replay
 - **Left / right** — step half a second
-- The same controls sit in the upper left of the frame, next to **download**
+- The same controls sit in the upper left of the frame, next to **download** and **video**
 
 ## Download
 
 **download** (upper left) saves [`rose.zip`](rose.zip): this page, `css/`, `js/`, `fonts/`, and this readme. Unzip it and open `rose/index.html` offline. On GitHub Pages the file is served from the site root as `/rose.zip` — for this repo, [https://juvan-vocaltech.github.io/love-heart/rose.zip](https://juvan-vocaltech.github.io/love-heart/rose.zip).
+
+**video** (upper left, beside download) saves [`rose.mp4`](rose.mp4): one full bloom cycle of this page, 21 seconds at 1080×1920. The file is H.264 (High, yuv420p) with a silent AAC track and the index at the front, so it plays in iPhone WhatsApp. On GitHub Pages the file is served from the site root as `/rose.mp4` — for this repo, [https://juvan-vocaltech.github.io/love-heart/rose.mp4](https://juvan-vocaltech.github.io/love-heart/rose.mp4).
 
 `?t=8.5` opens paused at that second. Add `&play=1` to start from there.
 
